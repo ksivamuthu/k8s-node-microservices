@@ -1,0 +1,29 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hero-service
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        editor: vscode
+    spec:
+      containers:
+      - name: hero-service
+        image: hero-service
+        imagePullPolicy: IfNotPresent
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  hero-service
+spec:
+  selector:
+    app: hero-service
+  type: ClusterIP
+  ports:
+  - name:  default
+    port:  80
+    targetPort:  3000

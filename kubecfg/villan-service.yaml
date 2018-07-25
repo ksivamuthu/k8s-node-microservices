@@ -1,0 +1,29 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: villain-service
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        editor: vscode
+    spec:
+      containers:
+      - name: villain-service
+        image: villain-service
+        imagePullPolicy: IfNotPresent
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  villain-service
+spec:
+  selector:
+    app: villain-service
+  type: ClusterIP
+  ports:
+  - name:  default
+    port:  80
+    targetPort:  3001

@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  villain-service:
+    image: villain-service
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3001:3001
+      - 9230:9230
+    command: node --inspect=0.0.0.0:9230 index.js
